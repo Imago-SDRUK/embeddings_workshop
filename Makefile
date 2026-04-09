@@ -1,4 +1,4 @@
-.PHONY: build_site build_jlite serve_jlite
+.PHONY: build_site build_jlite build_jlite_env serve_jlite
 
 serve_site:
 	quarto preview --port 4000 --host 0.0.0.0
@@ -10,25 +10,21 @@ build_site:
 	# Post-render provision
 	rm -rf docs/slides
 	cp -r slides/ docs/slides/
-	rm -rf docs/assets/jupyter-lite
-	cp -r jupyter-lite/dist docs/assets/jupyter-lite
+	rm -rf docs/assets/jupyterlite
+	cp -r jupyterlite/_output docs/assets/jupyterlite
+
+build_jlite_env:
+	mamba create -yn jlite
+	mamba install -n jlite -c conda-forge jupyterlite-core jupyterlite-xeus micromamba jupyterlab-geojson jupyter_server
 
 build_jlite:
-	### To be run inside a fresh container from repo home ###
-	# Move assets to landing folder
-	rm -rf jupyter-lite/content/*
-	cp 02-Lab.ipynb jupyter-lite/content/
-	cp -r assets/data jupyter-lite/content/
-	# Set up environment
-	conda create -yn jlite
-	rm -rf jupyter-lite/dist jupyter-lite/.jupyterlite.doit.db
-	# Build deployment
-	. /opt/conda/etc/profile.d/conda.sh && \
-		conda activate jlite && \
-		pip install -r jupyter-lite/requirements.txt && \
-		cd jupyter-lite && \
-		jupyter lite build --contents content --output-dir dist
+	# Clean previous build
+	rm -rf jupyterlite/_output jupyterlite/.jupyterlite.doit.db
+	# Build JupyterLite
+	cd jupyterlite && mamba run -n jlite jupyter lite build \
+		--XeusAddon.environment_file=environment.yaml \
+		--contents content/ \
+		--output-dir=_output
 
 serve_jlite:
-	jupyter lite serve --output-dir jupyter-lite/dist
-
+	mamba run -n jlite jupyter lite serve --output-dir jupyterlite/_output

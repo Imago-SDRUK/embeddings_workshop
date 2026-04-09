@@ -214,3 +214,7 @@ __marimo__/
 slides/*_files/
 slides/*.html
 .claude/
+
+# JupyterLite build artifacts
+jupyterlite/_output/
+jupyterlite/.jupyterlite.doit.db

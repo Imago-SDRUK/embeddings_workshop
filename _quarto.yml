@@ -9,6 +9,9 @@ project:
     - "CODE_OF_CONDUCT.md"
     - "CONTRIBUTING.md"
     - "02-Lab.ipynb"
+    - "jupyterlite/content/01-Semantic_similarity.ipynb"
+    - "jupyterlite/content/02-Change.ipynb"
+    - "jupyterlite/content/03-Predictive_modelling.ipynb"
 
 website:
   title: "Imago Workshop on Satellite Embeddings"
