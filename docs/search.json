@@ -1,0 +1,214 @@
+[
+  {
+    "objectID": "CODE_OF_CONDUCT.html",
+    "href": "CODE_OF_CONDUCT.html",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "Imago unlocks the potential of satellite imagery to help tackle urgent challenges facing the UK. As a programme, Imago comprises a range of research and engagement activities, with some data products or deliverables provided as open source. We are committed to creating a welcoming community, guided by best practices from our partners, community and contributors.\n\n\n\nInclusivity and Respect: Treat all contributors and users with dignity and fairness, regardless of background, experience, or identity.\nEmpowerment & Collaboration: Encourage skills development, sharing of ideas, and co-production of data products, embracing open science where appropriate and community-driven improvement.\nSupportiveness: Strive to make Imago a helpful, welcoming space, where questions and discussions are met with patience, curiosity, and encouragement—not derision or exclusion.\nHonesty & Integrity: Communicate and collaborate in ways that are truthful, transparent, and constructive. Misrepresentation, plagiarism, or data manipulation is not acceptable.\n\n\n\n\nAll contributors and users should: - Be welcoming, friendly, and patient with others. - Contribute positively; disagree respectfully and debate ideas, not people. - Avoid abusive, discriminatory, harassing, or anti-social behaviour (including in-person, online, or through images or data). - Respect privacy and personal boundaries of others, including data use and attribution. - Use language and imagery that is inclusive and appropriate for all community members. - Follow project policies, guidance, and decisions made by maintainers or facilitators.\n\n\n\n\nBullying, intimidation, harassment, derogatory comments, or personal attacks.\nDiscriminatory jokes or language related to gender, sexual orientation, disability, ethnicity, religion, or age.\nPlagiarism, falsification, or misrepresentation of contributions or data.\nAny conduct that disrupts the community, damages Imago’s reputation, or brings affiliated organisations into disrepute.\nUse of threatening, violent, or improper language—offline, online, or within the codebase.\n\n\n\n\n\nConcerns regarding breaches of this code should be reported confidentially to the project maintainers or lead institution (e.g., University of Liverpool contact).\nReports will be handled with respect, discretion, and good faith.\nBreaches may result in corrective actions including warnings, temporary or permanent exclusion from the project or its channels (e.g., repositories, online forums).\nSevere breaches may be escalated to host institutions.\n\n\n\n\nThis code applies to all spaces where Imago operates – including code repositories, communication channels, events, and related public communications, both online and offline.\n\n\n\nThe Imago team is committed to regularly reviewing and updating this code, seeking feedback from all participants, to ensure it remains effective, equitable, and aligned with open science best practice where relevant.\nThis code draws explicitly from the University of Liverpool’s Student Conduct Policy and the Newcastle University Students’ Union Code of Conduct, emphasising integrity, respect, inclusivity, and positive contribution."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#values",
+    "href": "CODE_OF_CONDUCT.html#values",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "Inclusivity and Respect: Treat all contributors and users with dignity and fairness, regardless of background, experience, or identity.\nEmpowerment & Collaboration: Encourage skills development, sharing of ideas, and co-production of data products, embracing open science where appropriate and community-driven improvement.\nSupportiveness: Strive to make Imago a helpful, welcoming space, where questions and discussions are met with patience, curiosity, and encouragement—not derision or exclusion.\nHonesty & Integrity: Communicate and collaborate in ways that are truthful, transparent, and constructive. Misrepresentation, plagiarism, or data manipulation is not acceptable."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#expected-behaviour",
+    "href": "CODE_OF_CONDUCT.html#expected-behaviour",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "All contributors and users should: - Be welcoming, friendly, and patient with others. - Contribute positively; disagree respectfully and debate ideas, not people. - Avoid abusive, discriminatory, harassing, or anti-social behaviour (including in-person, online, or through images or data). - Respect privacy and personal boundaries of others, including data use and attribution. - Use language and imagery that is inclusive and appropriate for all community members. - Follow project policies, guidance, and decisions made by maintainers or facilitators."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#unacceptable-behaviour",
+    "href": "CODE_OF_CONDUCT.html#unacceptable-behaviour",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "Bullying, intimidation, harassment, derogatory comments, or personal attacks.\nDiscriminatory jokes or language related to gender, sexual orientation, disability, ethnicity, religion, or age.\nPlagiarism, falsification, or misrepresentation of contributions or data.\nAny conduct that disrupts the community, damages Imago’s reputation, or brings affiliated organisations into disrepute.\nUse of threatening, violent, or improper language—offline, online, or within the codebase."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#reporting-and-enforcement",
+    "href": "CODE_OF_CONDUCT.html#reporting-and-enforcement",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "Concerns regarding breaches of this code should be reported confidentially to the project maintainers or lead institution (e.g., University of Liverpool contact).\nReports will be handled with respect, discretion, and good faith.\nBreaches may result in corrective actions including warnings, temporary or permanent exclusion from the project or its channels (e.g., repositories, online forums).\nSevere breaches may be escalated to host institutions."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#applicability",
+    "href": "CODE_OF_CONDUCT.html#applicability",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "This code applies to all spaces where Imago operates – including code repositories, communication channels, events, and related public communications, both online and offline."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#commitment-to-improvement",
+    "href": "CODE_OF_CONDUCT.html#commitment-to-improvement",
+    "title": "Imago Code of Conduct",
+    "section": "",
+    "text": "The Imago team is committed to regularly reviewing and updating this code, seeking feedback from all participants, to ensure it remains effective, equitable, and aligned with open science best practice where relevant.\nThis code draws explicitly from the University of Liverpool’s Student Conduct Policy and the Newcastle University Students’ Union Code of Conduct, emphasising integrity, respect, inclusivity, and positive contribution."
+  },
+  {
+    "objectID": "Materials.html",
+    "href": "Materials.html",
+    "title": "Materials",
+    "section": "",
+    "text": "Time\nSession\nURL\n\n\n\n\n13:45 – 14:00\nEmbeddings Overview: what are they and why should I care?\nSlides\n\n\n14:00 – 14:15\nInteractive exploration of embeddings\nImago Embedding Explorer\n\n\n14:15 – 14:35\nSemantic similarity [P]\nNotebook, \n\n\n14:35 – 15:05\nExploring change over time with embeddings [P]\nNotebook, \n\n\n15:05 – 15:45\nPredictive modelling with embeddings [P]\nNotebook, \n\n\n\n\n\n\nTo follow this workshop, you will need to download the following Imago’s data product:\n\nGoogle Satellite Embedding V1 - London LSOAs (2020, 2024)\n\nFor this, follow these steps:\n\nLog in at Imago’s data catalogue. If you do not have an account, sign up for free with an email address1.\nHead to the data product’s page.\nYou should now be able to see and download each year of embeddings at small area under the Resources section.\n\n\n\n\n\n\n\nTip\n\n\n\nOnce you are ready to graduate from our demo dataset, you can dive right into our newly released UK-wide data product of embeddings! You can access it at:\n\nhttps://data.imago.ac.uk/datasets/google-satellite-embedding-v1-small-areas-2017-2024\n\nThis encompasses yearly embeddings from 2017 to 2024 at small area level (LSOA equivalent for all UK nations).",
+    "crumbs": [
+      "Materials"
+    ]
+  },
+  {
+    "objectID": "Materials.html#content",
+    "href": "Materials.html#content",
+    "title": "Materials",
+    "section": "",
+    "text": "Time\nSession\nURL\n\n\n\n\n13:45 – 14:00\nEmbeddings Overview: what are they and why should I care?\nSlides\n\n\n14:00 – 14:15\nInteractive exploration of embeddings\nImago Embedding Explorer\n\n\n14:15 – 14:35\nSemantic similarity [P]\nNotebook, \n\n\n14:35 – 15:05\nExploring change over time with embeddings [P]\nNotebook, \n\n\n15:05 – 15:45\nPredictive modelling with embeddings [P]\nNotebook,",
+    "crumbs": [
+      "Materials"
+    ]
+  },
+  {
+    "objectID": "Materials.html#data",
+    "href": "Materials.html#data",
+    "title": "Materials",
+    "section": "",
+    "text": "To follow this workshop, you will need to download the following Imago’s data product:\n\nGoogle Satellite Embedding V1 - London LSOAs (2020, 2024)\n\nFor this, follow these steps:\n\nLog in at Imago’s data catalogue. If you do not have an account, sign up for free with an email address1.\nHead to the data product’s page.\nYou should now be able to see and download each year of embeddings at small area under the Resources section.\n\n\n\n\n\n\n\nTip\n\n\n\nOnce you are ready to graduate from our demo dataset, you can dive right into our newly released UK-wide data product of embeddings! You can access it at:\n\nhttps://data.imago.ac.uk/datasets/google-satellite-embedding-v1-small-areas-2017-2024\n\nThis encompasses yearly embeddings from 2017 to 2024 at small area level (LSOA equivalent for all UK nations).",
+    "crumbs": [
+      "Materials"
+    ]
+  },
+  {
+    "objectID": "Materials.html#footnotes",
+    "href": "Materials.html#footnotes",
+    "title": "Materials",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThe login is free and we only use it to keep track of usage, which our funder understandably wants to know about.↩︎",
+    "crumbs": [
+      "Materials"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Workshop on Satellite Embeddings",
+    "section": "",
+    "text": "Embeddings for the rest of us\n\n\nThis page contains all you need to follow our hands-on workshop introducing satellite (geo-)embeddings and their practical applications, delivered at GISRUK’26. The workshop focuses on demystifying what satellite embeddings are, and how they can be used in real-world tasks such as semantic search, change detection, and predictive modelling, with live coding in Python.\n\n\nDate: Tuesday 14th April 2026\nTime: 13:45 – 15:45\nLocation:\nRoom G26, Old Engineering Building (Y3)\nCome here to learn about:\n\nWhat geo-embeddings are and why they matter\n\nHow to work with embeddings in practical, real-world scenarios\n\nTechniques for semantic search and predictive modelling\n\nHands-on Python labs\n\n\n\n\n\n\n\n\n\n\n\nTime\nSession\n\n\n\n\n13:45 – 14:00\nEmbeddings Overview: what are they and why should I care?\n\n\n14:00 – 14:15\nInteractive exploration of embeddings\n\n\n14:15 – 14:35\nSemantic similarity [P]\n\n\n14:35 – 15:05\nExploring change over time with embeddings [P]\n\n\n15:05 – 15:45\nPredictive modelling with embeddings [P]\n\n\n\n[P] - Section based on Python\n\n\n\nTo get the most out of the workshop, participants should:\n\nBring a laptop\n\nBe comfortable with basic Python (no prior experience with embeddings required)\n\nHowever, we think there’s enough interesting stuff that does not rely on Python, so don’t make that deal breaker!\n\n\n\nThis is an open resource hosted on Github. We welcome contributions of all kinds—code, documentation, ideas, and more!\nPlease read our Contributing Guidelines for step-by-step instructions on how to:\n\nFork and clone the repository\nCreate a new branch for your changes\nUse issue and pull request templates\nGet acknowledged with the All Contributors Bot\nResolve merge conflicts\n\nIf you’re new to open source, our guidelines are designed to make it easy for you to get started.\nIf you have questions, open an issue or start a discussion!\n\n\n\nThis repository uses a dual-licensing approach:\n\nMIT License for all software code (see LICENSE)\nCreative Commons Attribution 4.0 International (CC BY 4.0) for documentation, data, and non-code content\n\nSee the LICENSE file for full details.",
+    "crumbs": [
+      "Workshop on Satellite Embeddings"
+    ]
+  },
+  {
+    "objectID": "index.html#workshop-details",
+    "href": "index.html#workshop-details",
+    "title": "Workshop on Satellite Embeddings",
+    "section": "",
+    "text": "Date: Tuesday 14th April 2026\nTime: 13:45 – 15:45\nLocation:\nRoom G26, Old Engineering Building (Y3)\nCome here to learn about:\n\nWhat geo-embeddings are and why they matter\n\nHow to work with embeddings in practical, real-world scenarios\n\nTechniques for semantic search and predictive modelling\n\nHands-on Python labs",
+    "crumbs": [
+      "Workshop on Satellite Embeddings"
+    ]
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Workshop on Satellite Embeddings",
+    "section": "",
+    "text": "Time\nSession\n\n\n\n\n13:45 – 14:00\nEmbeddings Overview: what are they and why should I care?\n\n\n14:00 – 14:15\nInteractive exploration of embeddings\n\n\n14:15 – 14:35\nSemantic similarity [P]\n\n\n14:35 – 15:05\nExploring change over time with embeddings [P]\n\n\n15:05 – 15:45\nPredictive modelling with embeddings [P]\n\n\n\n[P] - Section based on Python",
+    "crumbs": [
+      "Workshop on Satellite Embeddings"
+    ]
+  },
+  {
+    "objectID": "index.html#requirements",
+    "href": "index.html#requirements",
+    "title": "Workshop on Satellite Embeddings",
+    "section": "",
+    "text": "To get the most out of the workshop, participants should:\n\nBring a laptop\n\nBe comfortable with basic Python (no prior experience with embeddings required)\n\nHowever, we think there’s enough interesting stuff that does not rely on Python, so don’t make that deal breaker!",
+    "crumbs": [
+      "Workshop on Satellite Embeddings"
+    ]
+  },
+  {
+    "objectID": "index.html#contributing",
+    "href": "index.html#contributing",
+    "title": "Workshop on Satellite Embeddings",
+    "section": "",
+    "text": "This is an open resource hosted on Github. We welcome contributions of all kinds—code, documentation, ideas, and more!\nPlease read our Contributing Guidelines for step-by-step instructions on how to:\n\nFork and clone the repository\nCreate a new branch for your changes\nUse issue and pull request templates\nGet acknowledged with the All Contributors Bot\nResolve merge conflicts\n\nIf you’re new to open source, our guidelines are designed to make it easy for you to get started.\nIf you have questions, open an issue or start a discussion!",
+    "crumbs": [
+      "Workshop on Satellite Embeddings"
+    ]
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "Workshop on Satellite Embeddings",
+    "section": "",
+    "text": "This repository uses a dual-licensing approach:\n\nMIT License for all software code (see LICENSE)\nCreative Commons Attribution 4.0 International (CC BY 4.0) for documentation, data, and non-code content\n\nSee the LICENSE file for full details.",
+    "crumbs": [
+      "Workshop on Satellite Embeddings"
+    ]
+  },
+  {
+    "objectID": "CONTRIBUTING.html",
+    "href": "CONTRIBUTING.html",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "Thank you for your interest in contributing to this project! We welcome all kinds of contributions—code, documentation, ideas, and more. This guide will help you get started.\n\n\n\n\nFork this repository\nClick the Fork button at the top right of this page to create your own copy.\nClone your fork\nOpen your terminal and run:\ngit clone https://github.com/YOUR-USERNAME/Template.git\ncd Template\nCreate a new branch\nGive your branch a descriptive name:\ngit checkout -b my-feature-branch\nMake your changes\nAdd your code, documentation, or other contributions.\nCommit your changes\ngit add .\ngit commit -m \"Describe your changes\"\nPush to your fork\ngit push origin my-feature-branch\nOpen a Pull Request (PR)\n\nGo to your fork on GitHub.\nClick Compare & pull request.\nFill out the PR template and submit.\n\n\n\n\n\n\n\nWhen reporting a bug or requesting a feature, please use the provided issue templates for clear and helpful reports.\nWhen submitting a pull request, fill out the PR template to describe your changes and link related issues.\n\n\n\n\n\nWe celebrate all contributions! 🎉\nWe use the All Contributors Bot to recognize everyone’s work—code, docs, ideas, design, and more.\n\n\n\nAfter your PR is merged, comment on an issue or PR:\n@all-contributors please add @your-username for code, doc\n(Replace @your-username and the contribution types as appropriate.)\nThe bot will open a PR to update the contributors table in the README.\n\nReview and merge that PR to see your avatar and contributions appear!\n\n\n\n\nSee the emoji key for all the ways you can be recognized.\n\n\n\n## GitHub Access and Team Setup\n\n\nWe have completed the setup of GitHub access and team structures for the IMAGO Project. Each product team now has its own dedicated GitHub team, and all members have been assigned accordingly.\n\n\n🔗 Teams Directory: IMAGO GitHub Teams\n\n\n\n\n\n\n\n\nEach product team has a corresponding private repository.\n\nTeams are responsible for maintaining their own repositories.\n\nWhen a repository is ready to be shared publicly, it will be made available for everyone.\n\n\n\n\n\n\n\n\n\n\n\nWhen a member leaves the IMAGO Project: - Their membership will be converted to an Outside Collaborator.\n- They will retain access only to the repositories (public or private) they contributed to.\n- They will no longer be listed as a member of the organization.\n\n\n\n\n\nSearch existing issues before opening a new one.\nUse the bug or feature request templates.\nProvide a clear title, description, and steps to reproduce (if applicable).\nScreenshots and error messages are helpful!\n\n\n\n\n\nSometimes, your PR may have conflicts with the main branch. To resolve:\n\nFetch the latest changes:\ngit checkout main\ngit pull origin main\ngit checkout my-feature-branch\ngit merge main\nFix any conflicts in your files (look for &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt; markers).\nAdd and commit the resolved files:\ngit add .\ngit commit -m \"Resolve merge conflicts\"\nPush your branch again:\ngit push origin my-feature-branch\n\n\n\n\n\nBe respectful and considerate in all interactions.\nSee our Code of Conduct for details.\n\nWe appreciate your contributions and support in building a vibrant community around this project. If you have any questions, feel free to reach out via issues or discussions."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#how-to-contribute",
+    "href": "CONTRIBUTING.html#how-to-contribute",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "Fork this repository\nClick the Fork button at the top right of this page to create your own copy.\nClone your fork\nOpen your terminal and run:\ngit clone https://github.com/YOUR-USERNAME/Template.git\ncd Template\nCreate a new branch\nGive your branch a descriptive name:\ngit checkout -b my-feature-branch\nMake your changes\nAdd your code, documentation, or other contributions.\nCommit your changes\ngit add .\ngit commit -m \"Describe your changes\"\nPush to your fork\ngit push origin my-feature-branch\nOpen a Pull Request (PR)\n\nGo to your fork on GitHub.\nClick Compare & pull request.\nFill out the PR template and submit."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#using-issue-pr-templates",
+    "href": "CONTRIBUTING.html#using-issue-pr-templates",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "When reporting a bug or requesting a feature, please use the provided issue templates for clear and helpful reports.\nWhen submitting a pull request, fill out the PR template to describe your changes and link related issues."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#acknowledging-contributors-with-all-contributors-bot",
+    "href": "CONTRIBUTING.html#acknowledging-contributors-with-all-contributors-bot",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "We celebrate all contributions! 🎉\nWe use the All Contributors Bot to recognize everyone’s work—code, docs, ideas, design, and more.\n\n\n\nAfter your PR is merged, comment on an issue or PR:\n@all-contributors please add @your-username for code, doc\n(Replace @your-username and the contribution types as appropriate.)\nThe bot will open a PR to update the contributors table in the README.\n\nReview and merge that PR to see your avatar and contributions appear!\n\n\n\n\nSee the emoji key for all the ways you can be recognized.\n\n\n\n## GitHub Access and Team Setup\n\n\nWe have completed the setup of GitHub access and team structures for the IMAGO Project. Each product team now has its own dedicated GitHub team, and all members have been assigned accordingly.\n\n\n🔗 Teams Directory: IMAGO GitHub Teams"
+  },
+  {
+    "objectID": "CONTRIBUTING.html#team-and-repository-structure",
+    "href": "CONTRIBUTING.html#team-and-repository-structure",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "Each product team has a corresponding private repository.\n\nTeams are responsible for maintaining their own repositories.\n\nWhen a repository is ready to be shared publicly, it will be made available for everyone."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#offboarding-process",
+    "href": "CONTRIBUTING.html#offboarding-process",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "When a member leaves the IMAGO Project: - Their membership will be converted to an Outside Collaborator.\n- They will retain access only to the repositories (public or private) they contributed to.\n- They will no longer be listed as a member of the organization."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#reporting-issues",
+    "href": "CONTRIBUTING.html#reporting-issues",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "Search existing issues before opening a new one.\nUse the bug or feature request templates.\nProvide a clear title, description, and steps to reproduce (if applicable).\nScreenshots and error messages are helpful!"
+  },
+  {
+    "objectID": "CONTRIBUTING.html#resolving-merge-conflicts",
+    "href": "CONTRIBUTING.html#resolving-merge-conflicts",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "Sometimes, your PR may have conflicts with the main branch. To resolve:\n\nFetch the latest changes:\ngit checkout main\ngit pull origin main\ngit checkout my-feature-branch\ngit merge main\nFix any conflicts in your files (look for &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt; markers).\nAdd and commit the resolved files:\ngit add .\ngit commit -m \"Resolve merge conflicts\"\nPush your branch again:\ngit push origin my-feature-branch"
+  },
+  {
+    "objectID": "CONTRIBUTING.html#code-of-conduct",
+    "href": "CONTRIBUTING.html#code-of-conduct",
+    "title": "🌟 Contributing Guidelines",
+    "section": "",
+    "text": "Be respectful and considerate in all interactions.\nSee our Code of Conduct for details.\n\nWe appreciate your contributions and support in building a vibrant community around this project. If you have any questions, feel free to reach out via issues or discussions."
+  }
+]

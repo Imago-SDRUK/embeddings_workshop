@@ -1,0 +1,57 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-04-09T13:36:48.639114Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-04-09T13:22:30.188701Z",
+      "mimetype": null,
+      "name": "01-Semantic_similarity.ipynb",
+      "path": "01-Semantic_similarity.ipynb",
+      "size": 604,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-04-09T13:36:48.639336Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-04-09T13:22:21.456388Z",
+      "mimetype": null,
+      "name": "02-Change.ipynb",
+      "path": "02-Change.ipynb",
+      "size": 611,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-04-09T13:36:48.639551Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-04-09T13:21:56.370564Z",
+      "mimetype": null,
+      "name": "03-Predictive_modelling.ipynb",
+      "path": "03-Predictive_modelling.ipynb",
+      "size": 621,
+      "type": "notebook",
+      "writable": true
+    }
+  ],
+  "created": "2026-04-09T13:36:48.639336Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-04-09T13:36:48.639336Z",
+  "mimetype": null,
+  "name": "",
+  "path": "",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}
