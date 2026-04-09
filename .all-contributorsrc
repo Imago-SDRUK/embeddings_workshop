@@ -1,5 +1,5 @@
 {
-  "projectName": "Template",
+  "projectName": "embeddings_workshop",
   "projectOwner": "Imago-SDRUK",
   "repoType": "github",
   "repoHost": "https://github.com",
@@ -15,9 +15,25 @@
       "name": "Batool",
       "avatar_url": "https://github.com/batoolMM.png",
       "profile": "https://github.com/batoolMM",
-      "contributions": ["code", "doc", "maintenance"]
+      "contributions": [
+        "code",
+        "doc",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "darribas",
+      "name": "Dani Arribas-Bel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/417363?v=4",
+      "profile": "http://darribas.org",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "badgeTemplate": "flat"
+  "badgeTemplate": "flat",
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
