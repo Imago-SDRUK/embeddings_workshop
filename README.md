@@ -1,21 +1,11 @@
+# Workshop on Satellite Embeddings 
+
+> _Embeddings for the rest of us_
 
 <img src="assets/Imago-logo.png" alt="Imago Logo" width="300"/>
 
-# Imago Template Repository
 
-Welcome to the Imago template repository!  
-This repository provides a starting point for open, collaborative outputs that support the use of satellite imagery.
-
-## 🚀 How to Use This Template
-
-1. **Click "Use this template"** at the top of the repository page to create your own project based on this template.
-2. **Update project details** such as the title, description, and contact information in this README.
-3. **Review and adapt the [CONTRIBUTING.md](CONTRIBUTING.md)** file to match your project's contribution process.
-4. **Set up repository features**:
-   - Update issue and pull request templates in `.github/ISSUE_TEMPLATE/` and `.github/pull_request_template.md` as needed.
-   - Configure the [All Contributors Bot](https://allcontributors.org/) for contributor recognition.
-5. **Replace or add your own code, data, and documentation** in the appropriate folders.
-
+This repository contains materials for our ongoing workshops on satellite embeddings. The workshops generally focus on demystifying what satellite embeddings are, and how they can be used in real-world tasks such as semantic search, change detection, and predictive modelling, with live coding in Python.
 
 ## 🛠️ Contributing
 
@@ -44,8 +34,13 @@ See the [LICENSE](LICENSE) file for full details.
 
 ## 🗂️ Repository Structure
 
-- `assets/` — Images, diagrams, and other media files
-- `.github/` — Community health files (issue/PR templates, workflows)
+- `assets/` — Shared assets: logo, SCSS theme, bibliography
+- `slides/` — Reveal.js slide decks (Quarto `.qmd` sources)
+- `jupyterlite/` — JupyterLite deployment: environment spec, build config, and lab notebooks under `content/`
+- `docs/` — Generated website output, served via GitHub Pages
+- `_quarto.yml` — Quarto project and website configuration
+- `Makefile` — Build targets (`build_site`, `build_jlite`, `build_jlite_env`, `serve_site`, `serve_jlite`)
+- `.github/` — Issue/PR templates
 - `CONTRIBUTING.md` — How to contribute to this project
 - `CODE_OF_CONDUCT.md` — Community standards and expectations
 - `LICENSE` — Licensing information

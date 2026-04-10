@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imago similarity search explorer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" onerror="document.body.innerHTML='<div style=\'padding:40px;font-family:sans-serif;\'><h2>Failed to load Leaflet library</h2><p>Please download this HTML file and open it directly in your browser.</p><p>The artifact preview may block external scripts.</p></div>'"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* IMAGO Brand Colors */
+            --imago-navy: #24226F;
+            --imago-grey: #B8BCD1;
+            --imago-green: #03CEA3;
+            --imago-orange: #FF8F42;
+            --imago-light-grey: #E2E5F3;
+            --imago-blue: #1877CF;
+            --imago-dark-grey: #8C91A8;
+            --imago-white: #FFFFFF;
+            --imago-bg-dark: #4a4a49;
+
+            /* App color mappings */
+            --bg-primary: var(--imago-bg-dark);
+            --bg-secondary: #3a3a39;
+            --bg-tertiary: #5a5a59;
+            --border-color: #6a6a69;
+            --text-primary: var(--imago-white);
+            --text-secondary: var(--imago-grey);
+            --text-muted: var(--imago-dark-grey);
+            --accent-selected: var(--imago-green);
+            --accent-similar: var(--imago-orange);
+            --accent-average: var(--imago-dark-grey);
+            --accent-hover: #02b892;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            height: 100%;
+            width: auto;
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+        }
+
+        .upload-zone {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-btn:hover {
+            background: var(--border-color);
+            border-color: var(--imago-green);
+        }
+
+        .file-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .file-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mode-toggle {
+            margin-left: 8px;
+            padding-left: 16px;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .mode-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-btn:hover {
+            background: var(--border-color);
+            border-color: var(--imago-green);
+        }
+
+        .mode-label {
+            color: var(--text-muted);
+        }
+
+        .mode-value {
+            color: var(--imago-green);
+            font-weight: 500;
+        }
+
+        .mode-btn[data-mode="dissimilar"] .mode-value {
+            color: var(--imago-orange);
+        }
+
+        .mode-icon {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Initial View */
+        #initial-view {
+            flex: 1;
+            display: flex;
+        }
+
+        #initial-view.hidden {
+            display: none;
+        }
+
+        #single-map {
+            flex: 1;
+        }
+
+        /* Comparison View */
+        #comparison-view {
+            flex: 1;
+            display: none;
+            flex-direction: column;
+        }
+
+        #comparison-view.visible {
+            display: flex;
+        }
+
+        .maps-container {
+            flex: 1;
+            display: flex;
+            gap: 2px;
+            background: var(--border-color);
+        }
+
+        .map-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-primary);
+        }
+
+        .map-header {
+            padding: 10px 16px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .map-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .zone-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .zone-code.selected {
+            color: var(--imago-green);
+        }
+
+        .zone-code.similar {
+            color: var(--imago-orange);
+        }
+
+        .map-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .map-wrapper .leaflet-container {
+            height: 100%;
+            width: 100%;
+            background: var(--bg-primary);
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .control-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .k-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .k-slider {
+            width: 120px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .k-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--imago-green);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .k-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .k-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--imago-green);
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: var(--border-color);
+            border-color: var(--text-secondary);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .nav-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .position-indicator {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 0 12px;
+        }
+
+        .position-indicator span {
+            color: var(--imago-orange);
+            font-weight: 600;
+        }
+
+        .reset-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--imago-green);
+            border-radius: 6px;
+            color: var(--imago-green);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: auto;
+        }
+
+        .reset-btn:hover {
+            background: var(--imago-green);
+            color: var(--imago-bg-dark);
+        }
+
+        /* Radar Chart */
+        .radar-panel {
+            width: 320px;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .radar-header {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .radar-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .overview-map-container {
+            height: 140px;
+            min-height: 140px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        #overview-map {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-tertiary);
+        }
+
+        #overview-map .leaflet-container {
+            background: var(--bg-tertiary);
+        }
+
+        .radar-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            flex-shrink: 0;
+        }
+
+        #radar-chart {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Map Controls - Tooltip Toggle */
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .tooltip-toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .tooltip-toggle-label input {
+            width: 12px;
+            height: 12px;
+            accent-color: var(--imago-green);
+            cursor: pointer;
+        }
+
+        .tooltip-toggle-label:hover {
+            color: var(--text-primary);
+        }
+
+        /* Push Leaflet zoom controls down */
+        #single-map .leaflet-top.leaflet-left {
+            top: 42px;
+        }
+
+        #radar-chart {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .radar-legend {
+            padding: 10px 16px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 3px;
+            border-radius: 1px;
+        }
+
+        .legend-color.selected {
+            background: var(--imago-green);
+        }
+
+        .legend-color.similar {
+            background: var(--imago-orange);
+        }
+
+        .legend-color.average {
+            background: var(--imago-dark-grey);
+        }
+
+        .legend-label {
+            color: var(--text-secondary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .empty-state-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--text-secondary);
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 15, 20, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-overlay.visible {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--bg-tertiary);
+            border-top-color: var(--imago-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Leaflet Custom Styles */
+        .leaflet-control-zoom {
+            border: none !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+        }
+
+        .leaflet-control-zoom a {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        .leaflet-control-zoom a:hover {
+            background: var(--bg-tertiary) !important;
+        }
+
+        .leaflet-control-attribution {
+            background: rgba(10, 15, 20, 0.8) !important;
+            color: var(--text-muted) !important;
+            font-size: 10px !important;
+        }
+
+        .leaflet-control-attribution a {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Custom Leaflet Tooltip */
+        .leaflet-tooltip.polygon-tooltip {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            padding: 4px 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .leaflet-tooltip.polygon-tooltip::before {
+            border-top-color: var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://imago.ac.uk/static/ui/imago_logo.png" alt="IMAGO Data Service">
+                </div>
+                <h1>Imago similarity search explorer</h1>
+            </div>
+            <div class="upload-zone">
+                <div class="file-input-wrapper">
+                    <input type="file" id="file-input" class="file-input" accept=".geojson,.json">
+                    <button class="file-btn">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg>
+                        Upload GeoJSON
+                    </button>
+                </div>
+                <span id="file-name" class="file-name"></span>
+                <div class="mode-toggle">
+                    <button id="mode-btn" class="mode-btn" data-mode="similar">
+                        <span class="mode-label">Finding:</span>
+                        <span class="mode-value" id="mode-value">Most Similar</span>
+                        <svg class="mode-icon" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Initial View -->
+            <div id="initial-view">
+                <div id="single-map">
+                    <div class="map-controls">
+                        <label class="tooltip-toggle-label">
+                            <input type="checkbox" id="tooltip-toggle" checked>
+                            <span>Show labels</span>
+                        </label>
+                    </div>
+                    <div class="empty-state" id="empty-state">
+                        <div class="empty-state-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <p class="empty-state-text">Upload a GeoJSON file to begin exploring</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison View -->
+            <div id="comparison-view">
+                <div class="maps-container">
+                    <div class="map-panel">
+                        <div class="map-header">
+                            <span class="map-label">Selected Polygon</span>
+                            <span id="selected-zone-code" class="zone-code selected">—</span>
+                        </div>
+                        <div class="map-wrapper">
+                            <div id="left-map"></div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">
+                            <span class="map-label" id="similar-map-label">Similar Polygon</span>
+                            <span id="similar-zone-code" class="zone-code similar">—</span>
+                        </div>
+                        <div class="map-wrapper">
+                            <div id="right-map"></div>
+                        </div>
+                    </div>
+                    <div class="radar-panel">
+                        <div class="radar-header">
+                            <span class="radar-title">Location Overview</span>
+                        </div>
+                        <div class="overview-map-container">
+                            <div id="overview-map"></div>
+                        </div>
+                        <div class="radar-header">
+                            <span class="radar-title">Embedding Comparison</span>
+                        </div>
+                        <div class="radar-container">
+                            <canvas id="radar-chart" width="240" height="240"></canvas>
+                        </div>
+                        <div class="radar-legend">
+                            <div class="legend-item">
+                                <div class="legend-color selected"></div>
+                                <span class="legend-label">Selected polygon</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color similar"></div>
+                                <span class="legend-label">Similar polygon</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color average"></div>
+                                <span class="legend-label">Dataset average</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="controls-panel">
+                    <div class="control-group">
+                        <span class="control-label">k value</span>
+                        <div class="k-slider-container">
+                            <input type="range" id="k-slider" class="k-slider" min="1" max="50" value="10">
+                            <span id="k-value" class="k-value">10</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="nav-controls">
+                            <button id="prev-btn" class="nav-btn" disabled>
+                                <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+                                Prev
+                            </button>
+                            <span id="position-indicator" class="position-indicator">
+                                <span>1</span> of <span>10</span>
+                            </span>
+                            <button id="next-btn" class="nav-btn">
+                                Next
+                                <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button id="reset-btn" class="reset-btn">← Reset View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        // Application State
+        const state = {
+            geojsonData: null,
+            features: [],
+            embeddings: [],
+            embeddingMin: -1,
+            embeddingMax: 1,
+            datasetAverage: null,
+            selectedFeature: null,
+            similarFeatures: [],
+            currentSimilarIndex: 0,
+            kValue: 10,
+            similarityMode: 'similar', // 'similar' or 'dissimilar'
+            singleMap: null,
+            leftMap: null,
+            rightMap: null,
+            overviewMap: null,
+            singleMapLayer: null,
+            singleMapLabelsLayer: null,
+            leftMapLayer: null,
+            rightMapLayer: null,
+            overviewSelectedLayer: null,
+            overviewSimilarLayer: null,
+            isSyncing: false,
+            showTooltips: true
+        };
+
+        // DOM Elements
+        const elements = {
+            fileInput: document.getElementById('file-input'),
+            fileName: document.getElementById('file-name'),
+            initialView: document.getElementById('initial-view'),
+            comparisonView: document.getElementById('comparison-view'),
+            emptyState: document.getElementById('empty-state'),
+            singleMapContainer: document.getElementById('single-map'),
+            leftMapContainer: document.getElementById('left-map'),
+            rightMapContainer: document.getElementById('right-map'),
+            overviewMapContainer: document.getElementById('overview-map'),
+            selectedZoneCode: document.getElementById('selected-zone-code'),
+            similarZoneCode: document.getElementById('similar-zone-code'),
+            kSlider: document.getElementById('k-slider'),
+            kValueDisplay: document.getElementById('k-value'),
+            prevBtn: document.getElementById('prev-btn'),
+            nextBtn: document.getElementById('next-btn'),
+            positionIndicator: document.getElementById('position-indicator'),
+            resetBtn: document.getElementById('reset-btn'),
+            radarCanvas: document.getElementById('radar-chart'),
+            loading: document.getElementById('loading'),
+            tooltipToggle: document.getElementById('tooltip-toggle'),
+            modeBtn: document.getElementById('mode-btn'),
+            modeValue: document.getElementById('mode-value'),
+            similarMapLabel: document.getElementById('similar-map-label')
+        };
+
+        // Basemap Configuration
+        const basemapConfig = {
+            // Minimalist basemap for landing view
+            positron: {
+                url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            },
+            // Satellite imagery for comparison view
+            imagery: {
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                attribution: 'Tiles &copy; Esri'
+            },
+            labels: {
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}',
+                attribution: ''
+            },
+            labelsRef: {
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+                attribution: ''
+            }
+        };
+
+        // Polygon Styles
+        const styles = {
+            default: {
+                color: '#24226F',
+                weight: 1,
+                opacity: 0.8,
+                fillColor: '#1877CF',
+                fillOpacity: 0.25
+            },
+            hover: {
+                color: '#24226F',
+                weight: 2,
+                opacity: 1,
+                fillColor: '#1877CF',
+                fillOpacity: 0.45
+            },
+            selected: {
+                color: '#03CEA3',
+                weight: 3,
+                opacity: 1,
+                fillColor: '#03CEA3',
+                fillOpacity: 0.35
+            },
+            similar: {
+                color: '#FF8F42',
+                weight: 3,
+                opacity: 1,
+                fillColor: '#FF8F42',
+                fillOpacity: 0.35
+            }
+        };
+
+        // Initialize Maps
+        function initializeMaps() {
+            // Single map for initial view - minimalist basemap
+            state.singleMap = L.map(elements.singleMapContainer, {
+                center: [54.5, -3],
+                zoom: 6,
+                zoomControl: false
+            });
+
+            // Create a pane for labels that sits above everything
+            state.singleMap.createPane('labelsPane');
+            state.singleMap.getPane('labelsPane').style.zIndex = 650;
+            state.singleMap.getPane('labelsPane').style.pointerEvents = 'none';
+
+            // Add base tiles (no labels version)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+                attribution: basemapConfig.positron.attribution,
+                maxZoom: 19,
+                subdomains: 'abcd'
+            }).addTo(state.singleMap);
+
+            // Add custom zoom control position
+            L.control.zoom({ position: 'topleft' }).addTo(state.singleMap);
+
+            // Left map for comparison view
+            state.leftMap = L.map(elements.leftMapContainer, {
+                center: [54.5, -3],
+                zoom: 6,
+                zoomControl: true
+            });
+
+            addSatelliteBasemap(state.leftMap);
+
+            // Right map for comparison view
+            state.rightMap = L.map(elements.rightMapContainer, {
+                center: [54.5, -3],
+                zoom: 6,
+                zoomControl: false
+            });
+
+            addSatelliteBasemap(state.rightMap);
+
+            // Mini overview map
+            state.overviewMap = L.map(elements.overviewMapContainer, {
+                center: [54.5, -3],
+                zoom: 5,
+                zoomControl: false,
+                dragging: false,
+                touchZoom: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                attributionControl: false
+            });
+
+            L.tileLayer(basemapConfig.positron.url, {
+                maxZoom: 19,
+                subdomains: 'abcd'
+            }).addTo(state.overviewMap);
+
+            // Synchronize maps
+            syncMaps(state.leftMap, state.rightMap);
+            syncMaps(state.rightMap, state.leftMap);
+        }
+
+        function addSatelliteBasemap(map) {
+            L.tileLayer(basemapConfig.imagery.url, {
+                attribution: basemapConfig.imagery.attribution,
+                maxZoom: 19
+            }).addTo(map);
+
+            // Only add place/boundary labels, not roads
+            L.tileLayer(basemapConfig.labelsRef.url, {
+                maxZoom: 19,
+                pane: 'overlayPane'
+            }).addTo(map);
+        }
+
+        function syncMaps(sourceMap, targetMap) {
+            // Only sync zoom level, not pan position
+            sourceMap.on('zoom', () => {
+                if (state.isSyncing) return;
+                state.isSyncing = true;
+                targetMap.setZoom(sourceMap.getZoom(), { animate: false });
+                state.isSyncing = false;
+            });
+        }
+
+        // Extract embedding vector from feature
+        function getEmbedding(feature) {
+            const embedding = [];
+            for (let i = 0; i < 64; i++) {
+                const key = `A${i.toString().padStart(2, '0')}_mean`;
+                embedding.push(feature.properties[key] || 0);
+            }
+            return embedding;
+        }
+
+        // Calculate dataset average embedding
+        function calculateDatasetAverage() {
+            const numDimensions = 64;
+            const average = new Array(numDimensions).fill(0);
+
+            for (const embedding of state.embeddings) {
+                for (let i = 0; i < numDimensions; i++) {
+                    average[i] += embedding[i];
+                }
+            }
+
+            for (let i = 0; i < numDimensions; i++) {
+                average[i] /= state.embeddings.length;
+            }
+
+            return average;
+        }
+
+        // Calculate global min/max across all embeddings
+        function calculateEmbeddingBounds() {
+            let globalMin = Infinity;
+            let globalMax = -Infinity;
+
+            for (const embedding of state.embeddings) {
+                for (let i = 0; i < 64; i++) {
+                    const value = embedding[i];
+                    if (value < globalMin) globalMin = value;
+                    if (value > globalMax) globalMax = value;
+                }
+            }
+
+            // Add small padding to avoid edge cases
+            const range = globalMax - globalMin;
+            const padding = range * 0.05;
+            
+            state.embeddingMin = globalMin - padding;
+            state.embeddingMax = globalMax + padding;
+            
+            console.log(`Embedding bounds: [${state.embeddingMin.toFixed(3)}, ${state.embeddingMax.toFixed(3)}]`);
+        }
+
+        // Cosine similarity between two vectors
+        function cosineSimilarity(a, b) {
+            let dotProduct = 0;
+            let normA = 0;
+            let normB = 0;
+
+            for (let i = 0; i < a.length; i++) {
+                dotProduct += a[i] * b[i];
+                normA += a[i] * a[i];
+                normB += b[i] * b[i];
+            }
+
+            normA = Math.sqrt(normA);
+            normB = Math.sqrt(normB);
+
+            if (normA === 0 || normB === 0) return 0;
+            return dotProduct / (normA * normB);
+        }
+
+        // Find k most similar or dissimilar features
+        function findSimilarFeatures(selectedIndex, k, mode = 'similar') {
+            const selectedEmbedding = state.embeddings[selectedIndex];
+            const similarities = [];
+
+            for (let i = 0; i < state.features.length; i++) {
+                if (i === selectedIndex) continue;
+                const similarity = cosineSimilarity(selectedEmbedding, state.embeddings[i]);
+                similarities.push({ index: i, similarity });
+            }
+
+            // Sort descending for similar (highest first), ascending for dissimilar (lowest first)
+            if (mode === 'similar') {
+                similarities.sort((a, b) => b.similarity - a.similarity);
+            } else {
+                similarities.sort((a, b) => a.similarity - b.similarity);
+            }
+            
+            return similarities.slice(0, k).map(s => state.features[s.index]);
+        }
+
+        // Load GeoJSON data
+        function loadGeoJSON(data) {
+            if (typeof L === 'undefined') {
+                alert('Mapping library not loaded. Please refresh the page.');
+                return;
+            }
+            
+            showLoading(true);
+
+            setTimeout(() => {
+                state.geojsonData = data;
+                state.features = data.features;
+                state.embeddings = state.features.map(f => getEmbedding(f));
+                state.datasetAverage = calculateDatasetAverage();
+                calculateEmbeddingBounds();
+
+                elements.emptyState.style.display = 'none';
+
+                // Add polygons to single map
+                if (state.singleMapLayer) {
+                    state.singleMap.removeLayer(state.singleMapLayer);
+                }
+
+                state.singleMapLayer = L.geoJSON(data, {
+                    style: styles.default,
+                    onEachFeature: (feature, layer) => {
+                        // Add tooltip
+                        const zoneCode = feature.properties.data_zone_code || 'Unknown';
+                        layer.bindTooltip(zoneCode, {
+                            permanent: false,
+                            direction: 'top',
+                            className: 'polygon-tooltip',
+                            offset: [0, -10]
+                        });
+
+                        // Initially set tooltip based on toggle state
+                        if (!state.showTooltips) {
+                            layer.unbindTooltip();
+                            layer._tooltipContent = zoneCode;
+                        }
+
+                        layer.on({
+                            mouseover: (e) => {
+                                if (state.selectedFeature !== feature) {
+                                    e.target.setStyle(styles.hover);
+                                }
+                            },
+                            mouseout: (e) => {
+                                if (state.selectedFeature !== feature) {
+                                    e.target.setStyle(styles.default);
+                                }
+                            },
+                            click: (e) => {
+                                selectPolygon(feature);
+                            }
+                        });
+                    }
+                }).addTo(state.singleMap);
+
+                // Add labels layer on TOP of polygons
+                if (state.singleMapLabelsLayer) {
+                    state.singleMap.removeLayer(state.singleMapLabelsLayer);
+                }
+                state.singleMapLabelsLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+                    maxZoom: 19,
+                    subdomains: 'abcd',
+                    pane: 'labelsPane'
+                }).addTo(state.singleMap);
+
+                // Fit map to data bounds
+                const bounds = state.singleMapLayer.getBounds();
+                state.singleMap.fitBounds(bounds);
+
+                showLoading(false);
+            }, 100);
+        }
+
+        // Select a polygon and switch to comparison view
+        function selectPolygon(feature) {
+            const featureIndex = state.features.indexOf(feature);
+            if (featureIndex === -1) return;
+
+            state.selectedFeature = feature;
+            state.currentSimilarIndex = 0;
+
+            // Find similar features based on current mode
+            state.similarFeatures = findSimilarFeatures(featureIndex, state.kValue, state.similarityMode);
+
+            // Switch to comparison view
+            elements.initialView.classList.add('hidden');
+            elements.comparisonView.classList.add('visible');
+
+            // Update zone codes
+            elements.selectedZoneCode.textContent = feature.properties.data_zone_code || '—';
+
+            // Setup comparison maps
+            setTimeout(() => {
+                state.leftMap.invalidateSize();
+                state.rightMap.invalidateSize();
+                state.overviewMap.invalidateSize();
+                updateComparisonView();
+            }, 100);
+        }
+
+        // Update the comparison view
+        function updateComparisonView() {
+            if (!state.selectedFeature || state.similarFeatures.length === 0) return;
+
+            const similarFeature = state.similarFeatures[state.currentSimilarIndex];
+
+            // Update zone code display
+            elements.similarZoneCode.textContent = similarFeature.properties.data_zone_code || '—';
+
+            // Update position indicator
+            elements.positionIndicator.innerHTML = `<span>${state.currentSimilarIndex + 1}</span> of <span>${state.similarFeatures.length}</span>`;
+
+            // Update navigation buttons
+            elements.prevBtn.disabled = state.currentSimilarIndex === 0;
+            elements.nextBtn.disabled = state.currentSimilarIndex >= state.similarFeatures.length - 1;
+
+            // Clear and add layers to left map (selected)
+            if (state.leftMapLayer) {
+                state.leftMap.removeLayer(state.leftMapLayer);
+            }
+
+            state.leftMapLayer = L.geoJSON(state.selectedFeature, {
+                style: styles.selected
+            }).addTo(state.leftMap);
+
+            // Clear and add layers to right map (similar)
+            if (state.rightMapLayer) {
+                state.rightMap.removeLayer(state.rightMapLayer);
+            }
+
+            state.rightMapLayer = L.geoJSON(similarFeature, {
+                style: styles.similar
+            }).addTo(state.rightMap);
+
+            // Fit each map to its own polygon
+            const selectedBounds = state.leftMapLayer.getBounds();
+            const similarBounds = state.rightMapLayer.getBounds();
+            
+            // Calculate appropriate zoom level based on the larger polygon
+            const combinedBounds = L.latLngBounds(selectedBounds).extend(similarBounds);
+            state.leftMap.fitBounds(combinedBounds, { padding: [30, 30] });
+            
+            // Center each map on its own polygon (zoom is already synced)
+            setTimeout(() => {
+                state.leftMap.panTo(selectedBounds.getCenter(), { animate: false });
+                state.rightMap.panTo(similarBounds.getCenter(), { animate: false });
+            }, 50);
+
+            // Update overview map
+            updateOverviewMap(similarFeature);
+
+            // Draw radar chart
+            drawRadarChart();
+        }
+
+        // Update the overview mini-map
+        function updateOverviewMap(similarFeature) {
+            // Clear existing layers
+            if (state.overviewSelectedLayer) {
+                state.overviewMap.removeLayer(state.overviewSelectedLayer);
+            }
+            if (state.overviewSimilarLayer) {
+                state.overviewMap.removeLayer(state.overviewSimilarLayer);
+            }
+
+            // Add selected polygon
+            state.overviewSelectedLayer = L.geoJSON(state.selectedFeature, {
+                style: {
+                    color: '#03CEA3',
+                    weight: 2,
+                    opacity: 1,
+                    fillColor: '#03CEA3',
+                    fillOpacity: 0.6
+                }
+            }).addTo(state.overviewMap);
+
+            // Add similar polygon
+            state.overviewSimilarLayer = L.geoJSON(similarFeature, {
+                style: {
+                    color: '#FF8F42',
+                    weight: 2,
+                    opacity: 1,
+                    fillColor: '#FF8F42',
+                    fillOpacity: 0.6
+                }
+            }).addTo(state.overviewMap);
+
+            // Fit to show both polygons with padding
+            const bounds = state.overviewSelectedLayer.getBounds().extend(state.overviewSimilarLayer.getBounds());
+            state.overviewMap.fitBounds(bounds, { padding: [15, 15] });
+        }
+
+        // Draw radar chart
+        function drawRadarChart() {
+            const canvas = elements.radarCanvas;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const maxRadius = Math.min(width, height) / 2 - 20;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+
+            const numAxes = 64;
+            const angleStep = (2 * Math.PI) / numAxes;
+
+            // Get embeddings with safety checks
+            const selectedIndex = state.features.indexOf(state.selectedFeature);
+            const selectedEmbedding = selectedIndex >= 0 ? state.embeddings[selectedIndex] : null;
+            const similarFeature = state.similarFeatures[state.currentSimilarIndex];
+            const similarIndex = similarFeature ? state.features.indexOf(similarFeature) : -1;
+            const similarEmbedding = similarIndex >= 0 ? state.embeddings[similarIndex] : null;
+            const averageEmbedding = state.datasetAverage;
+
+            // Draw grid circles
+            ctx.strokeStyle = '#6a6a69';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 5; i++) {
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, (maxRadius * i) / 5, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+
+            // Draw axes
+            ctx.strokeStyle = '#5a5a59';
+            for (let i = 0; i < numAxes; i++) {
+                const angle = i * angleStep - Math.PI / 2;
+                const x = centerX + maxRadius * Math.cos(angle);
+                const y = centerY + maxRadius * Math.sin(angle);
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
+
+            // Helper function to draw polygon with fill
+            function drawPolygon(embedding, strokeColor, fillColor, lineWidth) {
+                if (!embedding || !Array.isArray(embedding)) return;
+                
+                ctx.beginPath();
+
+                const range = state.embeddingMax - state.embeddingMin;
+
+                for (let i = 0; i < numAxes; i++) {
+                    const angle = i * angleStep - Math.PI / 2;
+                    // Normalize value using actual data bounds
+                    const value = embedding[i] || 0;
+                    const normalizedValue = (value - state.embeddingMin) / range;
+                    const radius = normalizedValue * maxRadius;
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
+
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+
+                ctx.closePath();
+                
+                // Fill with transparency
+                ctx.fillStyle = fillColor;
+                ctx.fill();
+                
+                // Stroke
+                ctx.strokeStyle = strokeColor;
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+            }
+
+            // Draw average (bottom layer) - dark grey
+            drawPolygon(averageEmbedding, '#8C91A8', 'rgba(140, 145, 168, 0.15)', 1.5);
+
+            // Draw similar polygon - orange
+            drawPolygon(similarEmbedding, '#FF8F42', 'rgba(255, 143, 66, 0.2)', 2);
+
+            // Draw selected polygon (top layer) - green
+            drawPolygon(selectedEmbedding, '#03CEA3', 'rgba(3, 206, 163, 0.2)', 2);
+        }
+
+        // Reset to initial view
+        function resetView() {
+            state.selectedFeature = null;
+            state.similarFeatures = [];
+            state.currentSimilarIndex = 0;
+
+            elements.comparisonView.classList.remove('visible');
+            elements.initialView.classList.remove('hidden');
+
+            setTimeout(() => {
+                state.singleMap.invalidateSize();
+                if (state.singleMapLayer) {
+                    state.singleMap.fitBounds(state.singleMapLayer.getBounds());
+                }
+            }, 100);
+        }
+
+        // Show/hide loading overlay
+        function showLoading(show) {
+            elements.loading.classList.toggle('visible', show);
+        }
+
+        // Event Listeners
+        elements.fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            elements.fileName.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    loadGeoJSON(data);
+                } catch (error) {
+                    console.error('Error parsing GeoJSON:', error);
+                    alert('Error parsing GeoJSON file');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        elements.kSlider.addEventListener('input', (e) => {
+            state.kValue = parseInt(e.target.value);
+            elements.kValueDisplay.textContent = state.kValue;
+
+            // Recalculate similar features if in comparison view
+            if (state.selectedFeature) {
+                const featureIndex = state.features.indexOf(state.selectedFeature);
+                state.similarFeatures = findSimilarFeatures(featureIndex, state.kValue, state.similarityMode);
+                state.currentSimilarIndex = Math.min(state.currentSimilarIndex, state.similarFeatures.length - 1);
+                updateComparisonView();
+            }
+        });
+
+        elements.prevBtn.addEventListener('click', () => {
+            if (state.currentSimilarIndex > 0) {
+                state.currentSimilarIndex--;
+                updateComparisonView();
+            }
+        });
+
+        elements.nextBtn.addEventListener('click', () => {
+            if (state.currentSimilarIndex < state.similarFeatures.length - 1) {
+                state.currentSimilarIndex++;
+                updateComparisonView();
+            }
+        });
+
+        elements.resetBtn.addEventListener('click', resetView);
+
+        // Mode toggle (similar/dissimilar)
+        elements.modeBtn.addEventListener('click', () => {
+            if (state.similarityMode === 'similar') {
+                state.similarityMode = 'dissimilar';
+                elements.modeValue.textContent = 'Most Dissimilar';
+                elements.modeBtn.dataset.mode = 'dissimilar';
+                elements.similarMapLabel.textContent = 'Dissimilar Polygon';
+            } else {
+                state.similarityMode = 'similar';
+                elements.modeValue.textContent = 'Most Similar';
+                elements.modeBtn.dataset.mode = 'similar';
+                elements.similarMapLabel.textContent = 'Similar Polygon';
+            }
+
+            // Recalculate if in comparison view
+            if (state.selectedFeature) {
+                const featureIndex = state.features.indexOf(state.selectedFeature);
+                state.similarFeatures = findSimilarFeatures(featureIndex, state.kValue, state.similarityMode);
+                state.currentSimilarIndex = 0;
+                updateComparisonView();
+            }
+        });
+
+        // Tooltip toggle
+        elements.tooltipToggle.addEventListener('change', (e) => {
+            state.showTooltips = e.target.checked;
+            
+            if (state.singleMapLayer) {
+                state.singleMapLayer.eachLayer((layer) => {
+                    if (state.showTooltips) {
+                        const content = layer._tooltipContent || layer.feature.properties.data_zone_code || 'Unknown';
+                        layer.bindTooltip(content, {
+                            permanent: false,
+                            direction: 'top',
+                            className: 'polygon-tooltip',
+                            offset: [0, -10]
+                        });
+                    } else {
+                        if (layer.getTooltip()) {
+                            layer._tooltipContent = layer.getTooltip().getContent();
+                            layer.unbindTooltip();
+                        }
+                    }
+                });
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!elements.comparisonView.classList.contains('visible')) return;
+
+            if (e.key === 'ArrowLeft' && !elements.prevBtn.disabled) {
+                elements.prevBtn.click();
+            } else if (e.key === 'ArrowRight' && !elements.nextBtn.disabled) {
+                elements.nextBtn.click();
+            } else if (e.key === 'Escape') {
+                resetView();
+            }
+        });
+
+        // Initialize when everything is loaded
+        function tryInitialize(attempts = 0) {
+            if (typeof L !== 'undefined') {
+                initializeMaps();
+                return;
+            }
+            
+            if (attempts < 50) {
+                // Retry every 100ms for up to 5 seconds
+                setTimeout(() => tryInitialize(attempts + 1), 100);
+            } else {
+                console.error('Leaflet failed to load after 5 seconds');
+                alert('Failed to load mapping library. Please check your internet connection and refresh.');
+            }
+        }
+        
+        if (document.readyState === 'complete') {
+            tryInitialize();
+        } else {
+            window.addEventListener('load', () => tryInitialize());
+        }
+    </script>
+</body>
+</html>
