@@ -218,3 +218,7 @@ slides/*.html
 # JupyterLite build artifacts
 jupyterlite/_output/
 jupyterlite/.jupyterlite.doit.db
+
+# GeoPackage files in JupyterLite content
+jupyterlite/content/*.gpkg
+jupyterlite/content/*.geojson
