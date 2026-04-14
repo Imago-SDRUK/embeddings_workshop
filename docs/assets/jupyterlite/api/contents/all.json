@@ -2,7 +2,7 @@
   "content": [
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.687164Z",
+      "created": "2026-04-14T09:40:24.290998Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -16,7 +16,7 @@
     },
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.689544Z",
+      "created": "2026-04-14T09:40:24.293211Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -30,7 +30,7 @@
     },
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.684234Z",
+      "created": "2026-04-14T09:40:24.287794Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -44,7 +44,7 @@
     },
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.681655Z",
+      "created": "2026-04-14T09:40:24.285458Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -58,7 +58,7 @@
     },
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.695045Z",
+      "created": "2026-04-14T09:40:24.295345Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -72,21 +72,7 @@
     },
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.691769Z",
-      "format": null,
-      "hash": null,
-      "hash_algorithm": null,
-      "last_modified": "2026-04-14T07:10:19.513111Z",
-      "mimetype": null,
-      "name": "predictive_notebook.ipynb",
-      "path": "predictive_notebook.ipynb",
-      "size": 2151829,
-      "type": "notebook",
-      "writable": true
-    },
-    {
-      "content": null,
-      "created": "2026-04-14T08:35:56.680835Z",
+      "created": "2026-04-14T09:40:24.284902Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -100,7 +86,7 @@
     },
     {
       "content": null,
-      "created": "2026-04-14T08:35:56.683386Z",
+      "created": "2026-04-14T09:40:24.287344Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
@@ -113,11 +99,11 @@
       "writable": true
     }
   ],
-  "created": "2026-04-14T08:35:56.694021Z",
+  "created": "2026-04-14T09:40:24.294954Z",
   "format": "json",
   "hash": null,
   "hash_algorithm": null,
-  "last_modified": "2026-04-14T08:35:56.694021Z",
+  "last_modified": "2026-04-14T09:40:24.294954Z",
   "mimetype": null,
   "name": "",
   "path": "",
