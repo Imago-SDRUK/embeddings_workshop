@@ -12,6 +12,8 @@ build_site:
 	cp -r slides/ docs/slides/
 	rm -rf docs/assets/jupyterlite
 	cp -r jupyterlite/_output docs/assets/jupyterlite
+	# Ensure GitHub Pages skips Jekyll processing
+	touch docs/.nojekyll
 
 build_jlite_env:
 	mamba create -yn jlite
